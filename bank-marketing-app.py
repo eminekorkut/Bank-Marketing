@@ -61,7 +61,7 @@ def main():
 # Prediction function
 def bank_marketing_prediction(input_data):
     # Load the model
-    with open('bank_marketing_model.pkl', 'rb') as file:
+    with open('best_model.pkl', 'rb') as file:
         loaded_model = pickle.load(file)    # Ensure the input data is in DataFrame format with the correct columns
     input_data_df = pd.DataFrame(input_data)
     prediction = loaded_model.predict(input_data_df)
