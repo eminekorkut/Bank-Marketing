@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-with open('best_model.pkl', 'rb') as model_file:
-    loaded_model = pickle.load(model_file) 
 # Define the input form
 def main():
     st.title("Bank Marketing Prediction")
@@ -60,10 +58,11 @@ def main():
         st.write('Prediction:', 'Yes' if result == 1 else 'No')
 
 # Prediction function
+# Prediction function
 def bank_marketing_prediction(input_data):
-    # Load the model
-    with open('best_model.pkl', 'rb') as model_file:
-        loaded_model = pickle.load(model_file)    # Ensure the input data is in DataFrame format with the correct columns
+    model_path = os.path.join(os.path.dirname(__file__), 'best_model.pkl')
+    with open(model_path, 'rb') as model_file:
+        loaded_model = pickle.load(model_file)
     input_data_df = pd.DataFrame(input_data)
     prediction = loaded_model.predict(input_data_df)
     return prediction[0]
