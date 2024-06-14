@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import pickle
-    with open('best_model.pkl', 'rb') as model_file:
-        loaded_model = pickle.load(model_file) 
+
+with open('best_model.pkl', 'rb') as model_file:
+    loaded_model = pickle.load(model_file) 
 # Define the input form
 def main():
     st.title("Bank Marketing Prediction")
