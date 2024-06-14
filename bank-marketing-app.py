@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-import joblib
-
+import pickle
 
 # Define the input form
 def main():
