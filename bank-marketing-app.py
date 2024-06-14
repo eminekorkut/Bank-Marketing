@@ -1,6 +1,11 @@
+
+
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib
+
+# Load the trained model
+loaded_model = joblib.load('best_model.pkl')
 
 # Define the input form
 def main():
@@ -52,7 +57,6 @@ def main():
         'euribor3m': [euribor3m],
         'nr.employed': [nr_employed],
         'X_factor': [X_factor]
-
     })
 
     # Perform prediction
@@ -61,10 +65,10 @@ def main():
         st.write('Prediction:', 'Yes' if result == 1 else 'No')
 
 # Prediction function
-# Prediction function
 def bank_marketing_prediction(input_data):
-    with open("best_model.pkl", 'rb') as model_file:
-        loaded_model = pickle.load(model_file)
+    # Load the model
+    loaded_model = joblib.load('best_model.pkl')
+    # Ensure the input data is in DataFrame format with the correct columns
     input_data_df = pd.DataFrame(input_data)
     prediction = loaded_model.predict(input_data_df)
     return prediction[0]
