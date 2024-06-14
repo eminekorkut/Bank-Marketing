@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import os
 
 # Define the input form
 def main():
@@ -28,6 +27,7 @@ def main():
     cons_conf_idx = st.number_input('Cons Confidence Index', value=0.0)
     euribor3m = st.number_input('Euribor 3 Month', value=0.0)
     nr_employed = st.number_input('Nr Employed', value=0.0)
+    X_factor = st.number_input('X_factor', value=0.0)
 
     # Collect input data into a DataFrame
     input_data = pd.DataFrame({
@@ -50,7 +50,9 @@ def main():
         'cons.price.idx': [cons_price_idx],
         'cons.conf.idx': [cons_conf_idx],
         'euribor3m': [euribor3m],
-        'nr.employed': [nr_employed]
+        'nr.employed': [nr_employed],
+        'X_factor': [X_factor]
+
     })
 
     # Perform prediction
@@ -61,8 +63,7 @@ def main():
 # Prediction function
 # Prediction function
 def bank_marketing_prediction(input_data):
-    model_path = os.path.join(os.path.dirname(__file__), 'best_model.pkl')
-    with open(model_path, 'rb') as model_file:
+    with open("best_model.pkl", 'rb') as model_file:
         loaded_model = pickle.load(model_file)
     input_data_df = pd.DataFrame(input_data)
     prediction = loaded_model.predict(input_data_df)
